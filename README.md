@@ -1,9 +1,9 @@
 **Pull requests (e.g. support for more API endpoints, bugfixes) against dev are welcome!**
 
-tmdb-java
+tmdb-java-2
 ============
 
-A Java wrapper around the [TMDb v3 API][1] using [retrofit][2].
+A Java wrapper around the [TMDb v3 API][1] using [Retrofit 2][2].
 
 Usage
 -----
