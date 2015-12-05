@@ -23,6 +23,7 @@ import com.uwetrottmann.tmdb.entities.KeywordResultsPage;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb.entities.TvResultsPage;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -34,8 +35,8 @@ public interface SearchService {
      * @param query CGI escaped string
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
-    @GET("/search/company")
-    CompanyResultsPage company(
+    @GET("search/company")
+    Call<CompanyResultsPage> company(
             @Query("query") String query,
             @Query("page") Integer page
     );
@@ -47,8 +48,8 @@ public interface SearchService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/search/collection")
-    CollectionResultsPage collection(
+    @GET("search/collection")
+    Call<CollectionResultsPage> collection(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language
@@ -60,8 +61,8 @@ public interface SearchService {
      * @param query CGI escaped string
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
-    @GET("/search/collection")
-    KeywordResultsPage keyword(
+    @GET("search/collection")
+    Call<KeywordResultsPage> keyword(
             @Query("query") String query,
             @Query("page") Integer page
     );
@@ -80,8 +81,8 @@ public interface SearchService {
      * option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
      * those wanting more of an "autocomplete" type search, set this option to 'ngram'.
      */
-    @GET("/search/movie")
-    MovieResultsPage movie(
+    @GET("search/movie")
+    Call<MovieResultsPage> movie(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
@@ -101,8 +102,8 @@ public interface SearchService {
      * option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
      * those wanting more of an "autocomplete" type search, set this option to 'ngram'.
      */
-    @GET("/search/person")
-    PersonResultsPage person(
+    @GET("search/person")
+    Call<PersonResultsPage> person(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("include_adult") Boolean includeAdult,
@@ -120,8 +121,8 @@ public interface SearchService {
      * It's a great all purpose search type and by far the most tuned for every day querying. For those wanting more of
      * an "autocomplete" type search, set this option to 'ngram'.
      */
-    @GET("/search/tv")
-    TvResultsPage tv(
+    @GET("search/tv")
+    Call<TvResultsPage> tv(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,

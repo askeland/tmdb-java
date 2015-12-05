@@ -18,6 +18,7 @@ package com.uwetrottmann.tmdb.services;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Collection;
 import com.uwetrottmann.tmdb.entities.Images;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -30,8 +31,8 @@ public interface CollectionService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
-    @GET("/collection/{id}")
-    Collection summary(@Path("id") int tmdbId, @Query("language") String language, @Query("append_to_response") AppendToResponse appendToResponse);
+    @GET("collection/{id}")
+    Call<Collection> summary(@Path("id") int tmdbId, @Query("language") String language, @Query("append_to_response") AppendToResponse appendToResponse);
 
     /**
      * Get the images (posters and backdrops) for a specific collection id.
@@ -39,6 +40,6 @@ public interface CollectionService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/collection/{id}/images")
-    Images images(@Path("id") int tmdbId, @Query("language") String language);
+    @GET("collection/{id}/images")
+    Call<Images> images(@Path("id") int tmdbId, @Query("language") String language);
 }

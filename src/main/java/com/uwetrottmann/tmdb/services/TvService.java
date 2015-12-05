@@ -10,6 +10,7 @@ import com.uwetrottmann.tmdb.entities.TvResultsPage;
 import com.uwetrottmann.tmdb.entities.TvShowComplete;
 import com.uwetrottmann.tmdb.entities.Videos;
 
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -23,8 +24,8 @@ public interface TvService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
-    @GET("/tv/{id}")
-    TvShowComplete tv(
+    @GET("tv/{id}")
+    Call<TvShowComplete> tv(
             @Path("id") int tmdbId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
@@ -35,8 +36,8 @@ public interface TvService {
      *
      * @param tmdbId A themoviedb id.
      */
-    @GET("/tv/{id}/alternative_titles")
-    TvAlternativeTitles alternativeTitles(
+    @GET("tv/{id}/alternative_titles")
+    Call<TvAlternativeTitles> alternativeTitles(
             @Path("id") int tmdbId
     );
 
@@ -47,8 +48,8 @@ public interface TvService {
      * @param tmdbId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/credits")
-    Credits credits(
+    @GET("tv/{id}/credits")
+    Call<Credits> credits(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -59,8 +60,8 @@ public interface TvService {
      * @param tmdbId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/external_ids")
-    ExternalIds externalIds(
+    @GET("tv/{id}/external_ids")
+    Call<ExternalIds> externalIds(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -71,8 +72,8 @@ public interface TvService {
      * @param tmdbId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/images")
-    Images images(
+    @GET("tv/{id}/images")
+    Call<Images> images(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -82,8 +83,8 @@ public interface TvService {
      *
      * @param tmdbId A themoviedb id.
      */
-    @GET("/tv/{id}/keywords")
-    TvKeywords keywords(
+    @GET("tv/{id}/keywords")
+    Call<TvKeywords> keywords(
             @Path("id") int tmdbId
     );
     
@@ -94,8 +95,8 @@ public interface TvService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/similar")
-    TvResultsPage similar(
+    @GET("tv/{id}/similar")
+    Call<TvResultsPage> similar(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -107,8 +108,8 @@ public interface TvService {
      * @param tmdbId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/videos")
-    Videos videos(
+    @GET("tv/{id}/videos")
+    Call<Videos> videos(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -117,8 +118,8 @@ public interface TvService {
      * Get the latest TV show id.
      *
      */
-    @GET("/tv/latest")
-    TvShowComplete latest();
+    @GET("tv/latest")
+    Call<TvShowComplete> latest();
     
     /**
      * Get the list of TV shows that are currently on the air.
@@ -127,8 +128,8 @@ public interface TvService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/on_the_air")
-    TvResultsPage onTheAir(
+    @GET("tv/on_the_air")
+    Call<TvResultsPage> onTheAir(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -140,8 +141,8 @@ public interface TvService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/airing_today")
-    TvResultsPage airingToday(
+    @GET("tv/airing_today")
+    Call<TvResultsPage> airingToday(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -153,8 +154,8 @@ public interface TvService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/top_rated")
-    TvResultsPage topRated(
+    @GET("tv/top_rated")
+    Call<TvResultsPage> topRated(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -165,8 +166,8 @@ public interface TvService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/popular")
-    TvResultsPage popular(
+    @GET("tv/popular")
+    Call<TvResultsPage> popular(
             @Query("page") Integer page,
             @Query("language") String language
     );

@@ -17,18 +17,8 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.uwetrottmann.tmdb.entities.AppendToResponse;
-import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.ListResultsPage;
-import com.uwetrottmann.tmdb.entities.Movie;
-import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
-import com.uwetrottmann.tmdb.entities.MovieKeywords;
-import com.uwetrottmann.tmdb.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb.entities.Releases;
-import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
-import com.uwetrottmann.tmdb.entities.Videos;
-import com.uwetrottmann.tmdb.entities.Translations;
+import com.uwetrottmann.tmdb.entities.*;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -42,8 +32,8 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
-    @GET("/movie/{id}")
-    Movie summary(
+    @GET("movie/{id}")
+    Call<Movie> summary(
             @Path("id") int tmdbId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
@@ -55,8 +45,8 @@ public interface MoviesService {
      * @param tmdbId TMDb id.
      * @param country <em>Optional.</em> ISO 3166-1 code.
      */
-    @GET("/movie/{id}/alternative_titles")
-    MovieAlternativeTitles alternativeTitles(
+    @GET("movie/{id}/alternative_titles")
+    Call<MovieAlternativeTitles> alternativeTitles(
             @Path("id") int tmdbId,
             @Query("country") String country
     );
@@ -66,8 +56,8 @@ public interface MoviesService {
      *
      * @param tmdbId TMDb id.
      */
-    @GET("/movie/{id}/credits")
-    Credits credits(
+    @GET("movie/{id}/credits")
+    Call<Credits> credits(
             @Path("id") int tmdbId
     );
 
@@ -77,8 +67,8 @@ public interface MoviesService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/images")
-    Images images(
+    @GET("movie/{id}/images")
+    Call<Images> images(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -88,8 +78,8 @@ public interface MoviesService {
      *
      * @param tmdbId TMDb id.
      */
-    @GET("/movie/{id}/keywords")
-    MovieKeywords keywords(
+    @GET("movie/{id}/keywords")
+    Call<MovieKeywords> keywords(
             @Path("id") int tmdbId
     );
 
@@ -98,8 +88,8 @@ public interface MoviesService {
      *
      * @param tmdbId TMDb id.
      */
-    @GET("/movie/{id}/releases")
-    Releases releases(
+    @GET("movie/{id}/releases")
+    Call<Releases> releases(
             @Path("id") int tmdbId
     );
 
@@ -109,8 +99,8 @@ public interface MoviesService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/videos")
-    Videos videos(
+    @GET("movie/{id}/videos")
+    Call<Videos> videos(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -122,8 +112,8 @@ public interface MoviesService {
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      * @return
      */
-    @GET("/movie/{id}/translations")
-    Translations translations(
+    @GET("movie/{id}/translations")
+    Call<Translations> translations(
             @Path("id") int tmdbId,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
@@ -135,8 +125,8 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/similar")
-    MovieResultsPage similar(
+    @GET("movie/{id}/similar")
+    Call<MovieResultsPage> similar(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -149,8 +139,8 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/reviews")
-    ReviewResultsPage reviews(
+    @GET("movie/{id}/reviews")
+    Call<ReviewResultsPage> reviews(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -163,8 +153,8 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/lists")
-    ListResultsPage lists(
+    @GET("movie/{id}/lists")
+    Call<ListResultsPage> lists(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -173,8 +163,8 @@ public interface MoviesService {
     /**
      * Get the latest movie id.
      */
-    @GET("/movie/latest")
-    Movie latest();
+    @GET("movie/latest")
+    Call<Movie> latest();
 
     /**
      * Get the list of upcoming movies. This list refreshes every day. The maximum number of items this list will
@@ -183,8 +173,8 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/upcoming")
-    MovieResultsPage upcoming(
+    @GET("movie/upcoming")
+    Call<MovieResultsPage> upcoming(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -196,8 +186,8 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/now_playing")
-    MovieResultsPage nowPlaying(
+    @GET("movie/now_playing")
+    Call<MovieResultsPage> nowPlaying(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -208,8 +198,8 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/popular")
-    MovieResultsPage popular(
+    @GET("movie/popular")
+    Call<MovieResultsPage> popular(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -221,8 +211,8 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/top_rated")
-    MovieResultsPage topRated(
+    @GET("movie/top_rated")
+    Call<MovieResultsPage> topRated(
             @Query("page") Integer page,
             @Query("language") String language
     );

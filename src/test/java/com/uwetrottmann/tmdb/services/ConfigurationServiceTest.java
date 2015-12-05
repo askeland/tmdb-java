@@ -5,13 +5,15 @@ import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.entities.Configuration;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfigurationServiceTest extends BaseTestCase {
 
     @Test
-    public void test_configuration() {
-        Configuration config = getManager().configurationService().configuration();
+    public void test_configuration() throws IOException {
+        Configuration config = getManager().configurationService().configuration().execute().body();
         assertThat(config).isNotNull();
         assertThat(config.images).isNotNull();
         assertThat(config.images.base_url).isNotEmpty();

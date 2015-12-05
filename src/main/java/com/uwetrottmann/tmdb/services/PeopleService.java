@@ -22,6 +22,7 @@ import com.uwetrottmann.tmdb.entities.PersonCredits;
 import com.uwetrottmann.tmdb.entities.PersonIds;
 import com.uwetrottmann.tmdb.entities.PersonImages;
 import com.uwetrottmann.tmdb.entities.PersonResultsPage;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -33,8 +34,8 @@ public interface PeopleService {
      *
      * @param tmdbId TMDb id.
      */
-    @GET("/person/{id}")
-    Person summary(
+    @GET("person/{id}")
+    Call<Person> summary(
             @Path("id") int tmdbId
     );
 
@@ -44,8 +45,8 @@ public interface PeopleService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/person/{id}/movie_credits")
-    PersonCredits movieCredits(
+    @GET("person/{id}/movie_credits")
+    Call<PersonCredits> movieCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -56,8 +57,8 @@ public interface PeopleService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/person/{id}/tv_credits")
-    PersonCredits tvCredits(
+    @GET("person/{id}/tv_credits")
+    Call<PersonCredits> tvCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -68,8 +69,8 @@ public interface PeopleService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/person/{id}/combined_credits")
-    PersonCredits combinedCredits(
+    @GET("person/{id}/combined_credits")
+    Call<PersonCredits> combinedCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -77,31 +78,31 @@ public interface PeopleService {
     /**
      * Get the external ids for a specific person id.
      */
-    @GET("/person/{id}/external_ids")
-    PersonIds externalIds(
+    @GET("person/{id}/external_ids")
+    Call<PersonIds> externalIds(
             @Path("id") int tmdbId
     );
 
     /**
      * Get the images for a specific person id.
      */
-    @GET("/person/{id}/images")
-    PersonImages images(
+    @GET("person/{id}/images")
+    Call<PersonImages> images(
             @Path("id") int tmdbId
     );
 
     /**
      * Get the list of popular people on The Movie Database. This list refreshes every day.
      */
-    @GET("/person/popular")
-    PersonResultsPage popular(
+    @GET("person/popular")
+    Call<PersonResultsPage> popular(
             @Query("page") Integer page
     );
 
     /**
      * Get the latest person id.
      */
-    @GET("/person/latest")
-    Person latest();
+    @GET("person/latest")
+    Call<Person> latest();
 
 }

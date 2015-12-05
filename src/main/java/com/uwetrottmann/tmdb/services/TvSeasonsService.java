@@ -23,6 +23,7 @@ import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.TvSeason;
 import com.uwetrottmann.tmdb.entities.Videos;
 
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -36,8 +37,8 @@ public interface TvSeasonsService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
-    @GET("/tv/{id}/season/{season_number}")
-    TvSeason season(
+    @GET("tv/{id}/season/{season_number}")
+    Call<TvSeason> season(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Query("language") String language,
@@ -49,8 +50,8 @@ public interface TvSeasonsService {
      *
      * @param showId A themoviedb id.
      */
-    @GET("/tv/{id}/season/{season_number}/credits")
-    Credits credits(
+    @GET("tv/{id}/season/{season_number}/credits")
+    Call<Credits> credits(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber
     );
@@ -61,8 +62,8 @@ public interface TvSeasonsService {
      * @param showId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season_number}/external_ids")
-    ExternalIds externalIds(
+    @GET("tv/{id}/season/{season_number}/external_ids")
+    Call<ExternalIds> externalIds(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Query("language") String language
@@ -74,8 +75,8 @@ public interface TvSeasonsService {
      * @param showId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season_number}/images")
-    Images images(
+    @GET("tv/{id}/season/{season_number}/images")
+    Call<Images> images(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Query("language") String language
@@ -87,8 +88,8 @@ public interface TvSeasonsService {
      * @param showId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season_number}/videos")
-    Videos videos(
+    @GET("tv/{id}/season/{season_number}/videos")
+    Call<Videos> videos(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Query("language") String language
