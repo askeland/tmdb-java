@@ -7,49 +7,24 @@ A Java wrapper around the [TMDb v3 API][1] using [Retrofit 2][2].
 
 Usage
 -----
-![Maven Central version](https://img.shields.io/maven-central/v/com.uwetrottmann/tmdb-java.svg?style=flat-square)
+![Maven Central version](https://img.shields.io/maven-central/v/no.askeland/tmdb-java-2.svg?style=flat-square)
 
 Add the following dependency to your Gradle project:
 
 ```groovy
-compile 'com.uwetrottmann:tmdb-java:0.9.0'
+compile 'no.askeland:tmdb-java-2:2.0.0'
 ```
 
 or your Maven project:
 
 ```xml
 <dependency>
-    <groupId>com.uwetrottmann</groupId>
-    <artifactId>tmdb-java</artifactId>
-    <version>0.9.0</version>
+    <groupId>no.askeland</groupId>
+    <artifactId>tmdb-java-2</artifactId>
+    <version>2.0.0</version>
 </dependency>
 ```
 
-Dependencies
-------------
-If you rather use the [released jar][3], add dependencies yourself as you see fit.
-For example for Gradle:
-
-```groovy
-compile 'com.squareup.retrofit:retrofit:1.9.0'
-compile 'com.squareup.okhttp:okhttp:2.3.0' // not mandatory, but greatly recommended
-```
-
-Or for Maven:
-
-```xml
-<dependency>
-    <groupId>com.squareup.retrofit</groupId>
-    <artifactId>retrofit</artifactId>
-    <version>1.9.0</version>
-</dependency>
-<!-- not mandatory, but greatly recommended: -->
-<dependency>
-  <groupId>com.squareup.okhttp</groupId>
-  <artifactId>okhttp</artifactId>
-  <version>2.3.0</version>
-</dependency>
-```
 
 Example
 -------
@@ -62,8 +37,8 @@ tmdb.setApiKey("yourapikey");
 MovieService movieService = tmdb.movieService();
 //
 // Call any of the available endpoints
-Movie movie = movieService.summary(550);
-Trailers trailers = movieService.trailers(550);
+Movie movie = movieService.summary(550).execute().body();
+Trailers trailers = movieService.trailers(550).execute().body();
 ```
 
 See test cases in `src/test/` for more examples.
@@ -71,7 +46,8 @@ See test cases in `src/test/` for more examples.
 Related projects
 ----------------
 
-[tmdb-rx-java](https://github.com/migueljteixeira/tmdb-rx-java) - adds RxAndroid support
+[tmdb-java](https://github.com/UweTrottmann/tmdb-java) - Original project, using Retrofit 1.9
+[tmdb-rx-java](https://github.com/migueljteixeira/tmdb-rx-java) - Retrofit 1.9 with RxAndroid support
 
 License
 -------
