@@ -58,9 +58,8 @@ See test cases in `src/test/` for more (synchronous) examples.
 Related projects
 ----------------
 
-[tmdb-java](https://github.com/UweTrottmann/tmdb-java) - Original project, using Retrofit 1.9
-
-[tmdb-rx-java](https://github.com/migueljteixeira/tmdb-rx-java) - Retrofit 1.9 with RxAndroid support
+* [tmdb-java](https://github.com/UweTrottmann/tmdb-java) - Original project, using Retrofit 1.9
+* [tmdb-rx-java](https://github.com/migueljteixeira/tmdb-rx-java) - Retrofit 1.9 with RxAndroid support
 
 License
 -------
