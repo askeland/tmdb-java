@@ -13,7 +13,7 @@
     <groupId>no.askeland</groupId>
     <artifactId>tmdb-java-2</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.0</version>
+    <version>0.9.0</version>
 
     <name>tmdb-java</name>
     <description>tmdb-java-2 is a Java library that provides access to the themoviedatabase API v3 with Retrofit 2.</description>
