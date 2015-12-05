@@ -12,6 +12,7 @@ import com.uwetrottmann.tmdb.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb.entities.TvResultsPage;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,8 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SearchServiceTest extends BaseTestCase {
 
     @Test
-    public void test_companySearch() throws ParseException {
-        CompanyResultsPage companyResults = getManager().searchService().company("Sony Pictures", null);
+    public void test_companySearch() throws ParseException, IOException {
+        CompanyResultsPage companyResults = getManager().searchService().company("Sony Pictures", null).execute().body();
         
         assertResultsPage(companyResults);
         assertThat(companyResults.results).isNotEmpty();
@@ -30,9 +31,9 @@ public class SearchServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_collectionSearch() throws ParseException {
+    public void test_collectionSearch() throws ParseException, IOException {
         CollectionResultsPage collectionResults = getManager().searchService().collection("The Avengers Collection",
-                null, null);
+                null, null).execute().body();
         
         assertResultsPage(collectionResults);
         assertThat(collectionResults.results).isNotEmpty();
@@ -43,8 +44,8 @@ public class SearchServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_keywordSearch() throws ParseException {
-        KeywordResultsPage keywordResults = getManager().searchService().keyword("fight", null);
+    public void test_keywordSearch() throws ParseException, IOException {
+        KeywordResultsPage keywordResults = getManager().searchService().keyword("fight", null).execute().body();
         
         assertResultsPage(keywordResults);
         assertThat(keywordResults.results).isNotEmpty();
@@ -53,17 +54,17 @@ public class SearchServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_movieSearch() throws ParseException {
+    public void test_movieSearch() throws ParseException, IOException {
         MovieResultsPage movieResults = getManager().searchService().movie(TestData.MOVIE_TITLE, null, null,
-                null, null, null, null);
+                null, null, null, null).execute().body();
         
         assertResultsPage(movieResults);
         assertThat(movieResults.results).isNotEmpty();
     }
     
     @Test
-    public void test_personSearch() throws ParseException {
-        PersonResultsPage movieResults = getManager().searchService().person(TestData.PERSON_NAME, null, null, null);
+    public void test_personSearch() throws ParseException, IOException {
+        PersonResultsPage movieResults = getManager().searchService().person(TestData.PERSON_NAME, null, null, null).execute().body();
         
         assertResultsPage(movieResults);
         assertThat(movieResults.results.get(0).id).isNotNull();
@@ -89,8 +90,8 @@ public class SearchServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_tv() {
-        TvResultsPage tvResults = getManager().searchService().tv(TestData.TVSHOW_TITLE, null, null, null, null);
+    public void test_tv() throws IOException {
+        TvResultsPage tvResults = getManager().searchService().tv(TestData.TVSHOW_TITLE, null, null, null, null).execute().body();
         
         assertResultsPage(tvResults);        
         assertThat(tvResults.results).isNotEmpty();

@@ -20,6 +20,7 @@ import com.uwetrottmann.tmdb.entities.AppendToDiscoverResponse;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.TvResultsPage;
 import com.uwetrottmann.tmdb.enumerations.SortBy;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -72,8 +73,8 @@ public interface DiscoverService {
      * @param year <em>Optional.</em> Filter the results by all available release dates that have the specified value
      * added as a year. Expected value is an integer (year).
      */
-    @GET("/discover/movie")
-    MovieResultsPage discoverMovie(
+    @GET("discover/movie")
+    Call<MovieResultsPage> discoverMovie(
             @Query("include_adult") boolean includeAdult,
             @Query("include_video") boolean includeVideo,
             @Query("language") String language,
@@ -119,8 +120,8 @@ public interface DiscoverService {
      * @param firstAirDateGte <em>Optional.</em> The minimum release to include. Expected format is YYYY-MM-DD.
      * @param firstAirDateLte <em>Optional.</em> The maximum release to include. Expected format is YYYY-MM-DD.
      */
-    @GET("/discover/tv")
-    TvResultsPage discoverTv(
+    @GET("discover/tv")
+    Call<TvResultsPage> discoverTv(
             @Query("page") Integer page,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,

@@ -3,19 +3,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
-
-import com.uwetrottmann.tmdb.entities.AppendToResponse;
-import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.ListResultsPage;
-import com.uwetrottmann.tmdb.entities.Movie;
-import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
-import com.uwetrottmann.tmdb.entities.MovieKeywords;
-import com.uwetrottmann.tmdb.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb.entities.Releases;
-import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
-import com.uwetrottmann.tmdb.entities.Videos;
-import com.uwetrottmann.tmdb.entities.Translations;
+import com.uwetrottmann.tmdb.entities.*;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
 
@@ -38,7 +26,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_summary_language() throws ParseException, IOException {
         Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID, "pt", null).execute().body();
         assertThat(movie).isNotNull();
-        assertThat(movie.title).isEqualTo("Clube da Luta");
+        assertThat(movie.title).isEqualTo("Um Sonho de Liberdade");
     }
 
     @Test
@@ -58,12 +46,12 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(movie.tagline).isNotEmpty();
         assertThat(movie.adult).isFalse();
         assertThat(movie.backdrop_path).isNotEmpty();
-        assertThat(movie.budget).isEqualTo(63000000);
+        assertThat(movie.budget).isEqualTo(25000000);
         assertThat(movie.imdb_id).isEqualTo(TestData.MOVIE_IMDB);
         assertThat(movie.poster_path).isNotEmpty();
-        assertThat(movie.release_date).isEqualTo("1999-10-14");
-        assertThat(movie.revenue).isEqualTo(100853753);
-        assertThat(movie.runtime).isEqualTo(139);
+        assertThat(movie.release_date).isEqualTo("1994-09-14");
+        assertThat(movie.revenue).isEqualTo(28341469);
+        assertThat(movie.runtime).isEqualTo(142);
         assertThat(movie.vote_average).isPositive();
         assertThat(movie.vote_count).isPositive();
     }
@@ -130,8 +118,8 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(titles).isNotNull();
         assertThat(titles.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(titles.titles).isNotEmpty();
-        assertThat(titles.titles.get(0).iso_3166_1).isEqualTo("TW");
-        assertThat(titles.titles.get(0).title).isEqualTo("鬥陣俱樂部");
+        assertThat(titles.titles.get(0).iso_3166_1).isEqualTo("FI");
+        assertThat(titles.titles.get(0).title).isEqualTo("Rita Hayworth - Avain pakoon");
     }
 
     @Test
@@ -141,7 +129,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(credits.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(credits.cast).isNotEmpty();
         assertThat(credits.cast.get(0)).isNotNull();
-        assertThat(credits.cast.get(0).name).isEqualTo("Edward Norton");
+        assertThat(credits.cast.get(0).name).isEqualTo("Tim Robbins");
         assertThat(credits.crew).isNotEmpty();
     }
 
@@ -152,9 +140,9 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(images.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(images.backdrops).isNotEmpty();
         assertThat(images.backdrops.get(0).file_path).isNotEmpty();
-        assertThat(images.backdrops.get(0).width).isEqualTo(1280);
-        assertThat(images.backdrops.get(0).height).isEqualTo(720);
-        assertThat(images.backdrops.get(0).iso_639_1).isEqualTo("en");
+        assertThat(images.backdrops.get(0).width).isEqualTo(1920);
+        assertThat(images.backdrops.get(0).height).isEqualTo(1080);
+        assertThat(images.backdrops.get(0).iso_639_1).isNull();
         assertThat(images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7f);
         assertThat(images.backdrops.get(0).vote_average).isPositive();
         assertThat(images.backdrops.get(0).vote_count).isPositive();
@@ -173,8 +161,8 @@ public class MoviesServiceTest extends BaseTestCase {
         MovieKeywords keywords = getManager().moviesService().keywords(TestData.MOVIE_ID).execute().body();
         assertThat(keywords).isNotNull();
         assertThat(keywords.id).isEqualTo(TestData.MOVIE_ID);
-        assertThat(keywords.keywords.get(0).id).isEqualTo(825);
-        assertThat(keywords.keywords.get(0).name).isEqualTo("support group");
+        assertThat(keywords.keywords.get(0).id).isEqualTo(378);
+        assertThat(keywords.keywords.get(0).name).isEqualTo("prison");
     }
 
     @Test
@@ -184,7 +172,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(releases.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(releases.countries.get(0).iso_3166_1).isEqualTo("US");
         assertThat(releases.countries.get(0).certification).isEqualTo("R");
-        assertThat(releases.countries.get(0).release_date).isEqualTo("1999-10-14");
+        assertThat(releases.countries.get(0).release_date).isEqualTo("1994-09-14");
     }
 
     @Test

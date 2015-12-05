@@ -22,6 +22,7 @@ import com.uwetrottmann.tmdb.entities.Images;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 public class CollectionServiceTest extends BaseTestCase {
@@ -29,8 +30,8 @@ public class CollectionServiceTest extends BaseTestCase {
   }
 
   @Test
-  public void test_summary() throws ParseException {
-    Collection collection = this.getManager().collectionService().summary(TestData.MOVIE_COLLECTION_ID, null, null);
+  public void test_summary() throws ParseException, IOException {
+    Collection collection = this.getManager().collectionService().summary(TestData.MOVIE_COLLECTION_ID, null, null).execute().body();
     Assertions.assertThat(collection).isNotNull();
     Assertions.assertThat(collection.name).isEqualTo(TestData.MOVIE_COLLECTION_TITLE);
     Assertions.assertThat(collection.id).isEqualTo(1241);
@@ -44,15 +45,15 @@ public class CollectionServiceTest extends BaseTestCase {
   }
 
   @Test
-  public void test_images() {
-    Images images = this.getManager().collectionService().images(TestData.MOVIE_COLLECTION_ID, null);
+  public void test_images() throws IOException {
+    Images images = this.getManager().collectionService().images(TestData.MOVIE_COLLECTION_ID, null).execute().body();
     Assertions.assertThat(images).isNotNull();
     Assertions.assertThat(images.id).isEqualTo(1241);
     Assertions.assertThat(images.backdrops).isNotEmpty();
     Assertions.assertThat(images.backdrops.get(0).file_path).isNotEmpty();
     Assertions.assertThat(images.backdrops.get(0).width).isEqualTo(1920);
     Assertions.assertThat(images.backdrops.get(0).height).isEqualTo(1080);
-    Assertions.assertThat(images.backdrops.get(0).iso_639_1).isNull();
+    Assertions.assertThat(images.backdrops.get(0).iso_639_1).isEqualTo("en");
     Assertions.assertThat(images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7F);
     Assertions.assertThat(images.backdrops.get(0).vote_average).isPositive();
     Assertions.assertThat(images.backdrops.get(0).vote_count).isPositive();

@@ -14,6 +14,7 @@ import com.uwetrottmann.tmdb.entities.PersonResultsPage;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -27,8 +28,8 @@ public class PeopleServiceTest extends BaseTestCase {
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
     @Test
-    public void test_summary() throws ParseException {
-        Person person = getManager().personService().summary(TestData.PERSON_ID);
+    public void test_summary() throws ParseException, IOException {
+        Person person = getManager().personService().summary(TestData.PERSON_ID).execute().body();
         assertNotNull("Result was null.", person);
         assertEquals("Person name does not match.", "Brad Pitt", person.name);
         assertNotNull("Person homepage was null", person.homepage);
@@ -42,8 +43,8 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_movie_credits() {
-        PersonCredits credits = getManager().personService().movieCredits(TestData.PERSON_ID, null);
+    public void test_movie_credits() throws IOException {
+        PersonCredits credits = getManager().personService().movieCredits(TestData.PERSON_ID, null).execute().body();
         assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, false);
         assertCrewCredits(credits, false);
@@ -54,8 +55,8 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_tv_credits() {
-        PersonCredits credits = getManager().personService().tvCredits(TestData.PERSON_ID, null);
+    public void test_tv_credits() throws IOException {
+        PersonCredits credits = getManager().personService().tvCredits(TestData.PERSON_ID, null).execute().body();
         assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, false);
 
@@ -66,16 +67,16 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_combined_credits() {
-        PersonCredits credits = getManager().personService().combinedCredits(TestData.PERSON_ID, null);
+    public void test_combined_credits() throws IOException {
+        PersonCredits credits = getManager().personService().combinedCredits(TestData.PERSON_ID, null).execute().body();
         assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, true);
         assertCrewCredits(credits, true);
     }
     
     @Test
-    public void test_external_ids() {
-        PersonIds ids = getManager().personService().externalIds(TestData.PERSON_ID);
+    public void test_external_ids() throws IOException {
+        PersonIds ids = getManager().personService().externalIds(TestData.PERSON_ID).execute().body();
         assertThat(ids.id).isEqualTo(TestData.PERSON_ID);
         assertEquals("Person IMDB ID was null.", "nm0000093", ids.imdb_id);
         assertEquals("Person FREEBASE MID was null.", "/m/0c6qh", ids.freebase_mid);
@@ -84,8 +85,8 @@ public class PeopleServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_images() {
-        PersonImages images = getManager().personService().images(TestData.PERSON_ID);
+    public void test_images() throws IOException {
+        PersonImages images = getManager().personService().images(TestData.PERSON_ID).execute().body();
         assertThat(images.id).isEqualTo(TestData.PERSON_ID);
         
         for (Image image : images.profiles) {
@@ -97,8 +98,8 @@ public class PeopleServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_popular() {
-        PersonResultsPage popular = getManager().personService().popular(null);
+    public void test_popular() throws IOException {
+        PersonResultsPage popular = getManager().personService().popular(null).execute().body();
         
         assertThat(popular.results.get(0).id).isNotNull();
         assertThat(popular.results.get(0).name).isNotNull();
@@ -122,8 +123,8 @@ public class PeopleServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_latest() throws ParseException {
-        Person person = getManager().personService().latest();
+    public void test_latest() throws ParseException, IOException {
+        Person person = getManager().personService().latest().execute().body();
         // Latest person might not have a complete TMDb entry, but at should least some basic properties.
         assertThat(person).isNotNull();
         assertThat(person.name).isNotNull();

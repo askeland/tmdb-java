@@ -17,18 +17,7 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.uwetrottmann.tmdb.entities.AppendToResponse;
-import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.ListResultsPage;
-import com.uwetrottmann.tmdb.entities.Movie;
-import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
-import com.uwetrottmann.tmdb.entities.MovieKeywords;
-import com.uwetrottmann.tmdb.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb.entities.Releases;
-import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
-import com.uwetrottmann.tmdb.entities.Videos;
-import com.uwetrottmann.tmdb.entities.Translations;
+import com.uwetrottmann.tmdb.entities.*;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -150,7 +139,7 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/reviews")
+    @GET("movie/{id}/reviews")
     Call<ReviewResultsPage> reviews(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
@@ -164,7 +153,7 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/lists")
+    @GET("movie/{id}/lists")
     Call<ListResultsPage> lists(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
@@ -222,7 +211,7 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/top_rated")
+    @GET("movie/top_rated")
     Call<MovieResultsPage> topRated(
             @Query("page") Integer page,
             @Query("language") String language

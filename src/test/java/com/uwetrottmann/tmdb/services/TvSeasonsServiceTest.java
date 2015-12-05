@@ -32,6 +32,7 @@ import com.uwetrottmann.tmdb.entities.Videos.Video;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,15 +40,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TvSeasonsServiceTest extends BaseTestCase {
 
     @Test
-    public void test_season() {
-        TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null, null);
+    public void test_season() throws IOException {
+        TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null, null).execute().body();
         assertTvSeason(season);
     }
 
     @Test
-    public void test_season_with_append_to_response() {
+    public void test_season_with_append_to_response() throws IOException {
         TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null,
-                new AppendToResponse(AppendToResponseItem.IMAGES, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.CREDITS));
+                new AppendToResponse(AppendToResponseItem.IMAGES, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.CREDITS)).execute().body();
         assertTvSeason(season);
 
         // credits
@@ -67,16 +68,16 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_credits() {
-        Credits credits = getManager().tvSeasonsService().credits(TestData.TVSHOW_ID, 1);
+    public void test_credits() throws IOException {
+        Credits credits = getManager().tvSeasonsService().credits(TestData.TVSHOW_ID, 1).execute().body();
         assertThat(credits.id).isNotNull();
         assertCrewCredits(credits.crew);
         assertCastCredits(credits.cast);
     }
     
     @Test
-    public void test_externalIds() {
-        ExternalIds ids = getManager().tvSeasonsService().externalIds(TestData.TVSHOW_ID, 1, null);
+    public void test_externalIds() throws IOException {
+        ExternalIds ids = getManager().tvSeasonsService().externalIds(TestData.TVSHOW_ID, 1, null).execute().body();
         assertThat(ids.id).isNotNull();
         assertThat(ids.freebase_id).isNotNull();
         assertThat(ids.freebase_mid).isNotNull();
@@ -84,15 +85,15 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_images() {
-        Images images = getManager().tvSeasonsService().images(TestData.TVSHOW_ID, 1, null);
+    public void test_images() throws IOException {
+        Images images = getManager().tvSeasonsService().images(TestData.TVSHOW_ID, 1, null).execute().body();
         assertThat(images.id).isNotNull();
         assertImages(images.posters);
     }
     
     @Test
-    public void test_videos() {
-        Videos videos = getManager().tvSeasonsService().videos(TestData.TVSHOW_ID, 1, null);
+    public void test_videos() throws IOException {
+        Videos videos = getManager().tvSeasonsService().videos(TestData.TVSHOW_ID, 1, null).execute().body();
         assertThat(videos.id).isNotNull();
         
         for (Video video : videos.results) {

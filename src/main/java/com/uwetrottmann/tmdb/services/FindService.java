@@ -2,6 +2,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.FindResults;
 import com.uwetrottmann.tmdb.enumerations.ExternalSource;
+import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -19,8 +20,8 @@ public interface FindService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      * @return
      */
-    @GET("/find/{id}")
-    FindResults find(
+    @GET("find/{id}")
+    Call<FindResults> find(
             @Path("id") String externalId,
             @Query("external_source") ExternalSource source,
             @Query("language") String language
